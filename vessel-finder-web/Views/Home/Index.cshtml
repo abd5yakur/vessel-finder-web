@@ -1,0 +1,59 @@
+﻿@using Syncfusion.EJ2
+@model Vessel;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .card {
+        margin: 5%;
+    }
+</style>
+<div class="container">
+    <h1>
+        Vessel Finder
+    </h1>
+    <div class="card">
+        <div class="card-header">IMO Number</div>
+        <div class="card-body">
+            <form id="myForm" method="post" asp-controller="Home" asp-action="Index">
+                <label>IMO* Number</label><br />
+                <p style="font-size: 11px">*International Maritime Organization</p>
+                <input id="IMO_No" name="IMO_No" type="text" placeholder="Enter IMO Number" value="@ViewData["IMO_No"]" />
+                <button type="submit" class="btn btn-info" style="margin-right:1%">Search</button>                
+                <input class="btn btn-danger" type="button" onclick="myFunction()" value="Cancel">
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Vessel Map</div>
+        <div class="card-body">
+            <center>
+                <text>
+                    <h3>@ViewBag.message</h3>
+                </text>
+               
+                <br>
+                <script type="text/javascript">
+                    // Map appearance
+                    var width = "80%";         // width in pixels or percentage
+                    var height = "300";         // height in pixels
+                    var names = true;           // always show ship names (defaults to false)
+
+                    // Single ship tracking
+                    var imo = @ViewBag.IMO;        // display latest position (by IMO, overrides MMSI)
+                    var show_track = true;      // display track line (last 24 hours)
+                </script>
+                <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
+            </center>
+        </div>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        document.getElementById("myForm").reset();
+    }
+</script>
