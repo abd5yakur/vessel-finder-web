@@ -2,28 +2,38 @@
 @model Vessel;
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Port";
 }
 
 <style>
     .card {
         margin: 5%;
     }
+
+    font {
+    }
 </style>
 <div class="container">
     <h1>
-        Vessel Finder
+        Port Finder
     </h1>
     <div class="card">
-        <div class="card-header">IMO Number</div>
+        <div class="card-header">Port Name</div>
         <div class="card-body">
-            <form id="myForm" method="post" asp-controller="Home" asp-action="Index">
-                <label>IMO* Number</label><br />
-                <p style="font-size: 11px">*International Maritime Organization</p>
-                <input id="IMO_No" name="IMO_No" type="text" placeholder="Enter IMO Number" value="@ViewData["IMO_No"]" />
-                <button type="submit" class="btn btn-info" style="margin-right:1%">Search</button>
-                <input class="btn btn-danger" type="button" asp-controller="Home" asp-action="Index" value="Cancel">
-            </form>
+           
+                <center>
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Kuantan">
+                        KUANTAN PORT
+                    </a>
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Klang">
+                        KLANG PORT
+                    </a>
+                    <a class="btn btn-info" asp-controller="Home" asp-action="Kemaman">
+                        KEMAMAN PORT
+                    </a>
+                </center>
+
+            
         </div>
     </div>
 
@@ -35,7 +45,7 @@
         <div class="card-body">
             <center>
 
-                @if (TempData["IMO_No"] == null)
+                @if (TempData["port_name"] == null)
                 {
                     <text>
                         <h3>MAP</h3>
@@ -52,7 +62,7 @@
                     </script>
                     <script type="text/javascript" src="https://www.vesselfinder.com/aismap.js"></script>
                 }
-                else if (TempData["IMO_No"] != null)
+                else if (TempData["port_name"] != null)
                 {
                     <text>
                         <h3>@ViewBag.message</h3>

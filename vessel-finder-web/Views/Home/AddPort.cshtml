@@ -1,0 +1,56 @@
+﻿@using Syncfusion.EJ2
+@model Port;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .card {
+        margin: 5%;
+    }
+</style>
+<div class="container">
+    <h1>
+        Add Port
+    </h1>
+    <div class="card">
+        <div class="card-header">Port</div>
+        <div class="card-body">
+            <form id="myForm" method="post" asp-controller="Home" asp-action="AddPort">
+
+                <div class="form-group row">
+                    <label class="col-3" style="width: 100%">Port Name</label>
+                    <input class="col-8" id="port_name" name="port_name" type="text" value="@ViewData["port_name"]" style="width: 100%" />
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-3" style="width: 100%">Latitude</label>
+                    <input class="col-8" id="port_lat" name="port_lat" type="text" value="@ViewData["port_lat"]" style="width: 100%" />
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-3" style="width: 100%">Longitude</label>
+                    <input class="col-8" id="port_long" name="port_long" type="text" value="@ViewData["port_long"]" style="width: 100%" />
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-8">
+                        <input class="btn btn-danger col-md-3" type="button" asp-controller="Home" asp-action="Index" value="Cancel">
+                        <button type="submit" class="btn btn-info col-md-3" style="margin-right:1%">Add</button>
+                    </div>
+                    
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function myFunction() {
+        document.getElementById("myForm").reset();
+    }
+</script>
