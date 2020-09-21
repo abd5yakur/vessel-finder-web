@@ -10,5 +10,8 @@ namespace vessel_finder_web.Models
         // IMO number
         public string IMO_No { get; set; }
 
+        //mmsi number
+        public string MMSI_No { get; set; }
+
     }
 }

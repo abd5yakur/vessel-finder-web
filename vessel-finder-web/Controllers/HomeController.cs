@@ -138,6 +138,37 @@ namespace vessel_finder_web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Vessel()
+        {
+
+            TempData["MMSI_No"] = null;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Vessel(Vessel vessel)
+        {
+
+            ViewData["MMSI_No"] = vessel.MMSI_No;
+            TempData["MMSI_No"] = vessel.MMSI_No;
+            TempData.Keep("MMSI_No");
+
+
+            if (vessel.MMSI_No != null)
+            {
+                ViewBag.MMSI_No = vessel.MMSI_No;
+                ViewBag.message = "MMSI No: " + vessel.MMSI_No;
+            }
+            else
+            {
+                ViewBag.MMSI_No = "Noob";
+            }
+            return View();
+        }
+
+
+
 
     }
 }

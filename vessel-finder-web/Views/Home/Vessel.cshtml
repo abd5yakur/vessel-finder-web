@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "Vessel@MarineTraffic";
+}
+<style>
+    .card {
+        margin: 3%;
+    }
+</style>
+
+<h1>Vessel (Marine Traffic)</h1>
+
+
+<div class="card">
+    <div class="card-header">MMSI Number</div>
+    <div class="card-body">
+        <form id="myForm" method="post" asp-controller="Home" asp-action="Vessel">
+            <label>MMSI* Number</label><br />
+            <p style="font-size: 11px">*Maritime Mobile Service Identity</p>
+            <input id="MMSI_No" name="MMSI_No" type="text" placeholder="Enter MMSI Number" value="@ViewData["MMSI_No"]" />
+            <button type="submit" class="btn btn-info" style="margin-right:1%">Search</button>
+            <input class="btn btn-danger" type="button" asp-controller="Home" asp-action="Vessel" value="Cancel">
+        </form>
+    </div>
+</div>
+
+
+
+
+<div class="card">
+    <div class="card-header">Vessel Location</div>
+    <div class="card-body">
+        <center>
+
+            @if (TempData["MMSI_No"] == null)
+            {
+                <h3>Map</h3>
+                <script type="text/javascript">
+                    width = '100%';		// the width of the embedded map in pixels or percentage
+                    height = '450';		// the height of the embedded map in pixels or percentage
+                    border = '0';		// the width of the border around the map (zero means no border)
+                    shownames = 'false';	// to display ship names on the map (true or false)
+                    latitude = '4.140634';	// the latitude of the center of the map, in decimal degrees
+                    longitude = '109.6181485';	// the longitude of the center of the map, in decimal degrees
+                    zoom = '13';		// the zoom level of the map (values between 2 and 17)
+                    maptype = '0';		// use 0 for Normal Map, 1 for Satellite
+                    trackvessel = '';	// MMSI of a vessel (note: vessel will be displayed only if within range of the system) - overrides "zoom" option
+                    fleet = '';		// the registered email address of a user-defined fleet (user's default fleet is used)
+                    
+                </script>
+                <script type="text/javascript" src="//www.marinetraffic.com/js/embed.js"></script>
+            }
+
+            else if (TempData["MMSI_No"] != null)
+            {
+
+                <h3>@ViewBag.message</h3>
+                <script type="text/javascript">
+                width = '100%';		// the width of the embedded map in pixels or percentage
+                height = '450';		// the height of the embedded map in pixels or percentage
+                border = '0';		// the width of the border around the map (zero means no border)
+                shownames = 'false';	// to display ship names on the map (true or false)
+                //latitude = '2.99829';	// the latitude of the center of the map, in decimal degrees
+                //longitude = '101.3918';	// the longitude of the center of the map, in decimal degrees
+                zoom = '13';		// the zoom level of the map (values between 2 and 17)
+                maptype = '0';		// use 0 for Normal Map, 1 for Satellite
+                trackvessel = @ViewBag.MMSI_No;	// MMSI of a vessel (note: vessel will be displayed only if within range of the system) - overrides "zoom" option
+                fleet = '';		// the registered email address of a user-defined fleet (user's default fleet is used)
+                        //imo = '9202792';
+                </script>
+                <script type="text/javascript" src="//www.marinetraffic.com/js/embed.js"></script>
+            }
+
+
+
+
+
+        </center>
+
+
+
+
+    </div>
+</div>
